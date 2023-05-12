@@ -15,7 +15,21 @@ const router = new express.Router();
 router.get("/", async function (req, res, next) {
   const customers = await Customer.all();
   return res.render("customer_list.html", { customers });
+
 });
+ /** search customer*/
+
+ router.get("/search/", async function (req, res, next) {
+  const search = req.query.search
+
+  console.log("search======",search)
+
+  const customers = await Customer.searchCustomer(search);
+  console.log("customer======", customers)
+  return res.render("search_result.html", { customers });
+
+});
+
 
 /** Form to add a new customer. */
 
